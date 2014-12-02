@@ -11,6 +11,7 @@ module mkMessageRouter( Vector#( NumCaches, MessageFifo#( n )) c2r,
     
     rule c2m;
         Bool done = False;
+        //First check for responses
         for( Integer i = 0; !done && i < valueOf( NumCaches ); i = i + 1 ) begin
             if( c2r[ i ].hasResp ) begin
                 if (c2r[ i ].first matches tagged Resp .resp) begin
@@ -20,6 +21,7 @@ module mkMessageRouter( Vector#( NumCaches, MessageFifo#( n )) c2r,
                 end
             end
         end
+        //then check for requests
         for( Integer i = 0; !done && i < valueOf( NumCaches ); i = i + 1 ) begin
             if( c2r[ i ].hasReq ) begin
                 if ( c2r[ i ].first matches tagged Req  .req) begin
