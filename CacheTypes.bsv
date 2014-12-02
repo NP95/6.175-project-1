@@ -61,6 +61,7 @@ typedef 8 CacheRows;
 typedef 2 NumCaches;
 
 // Data Types
+typedef TMul#(CacheLineWords, 4) CacheLineBytes;
 typedef Bit#( TSub#(TSub#(30,TLog#(CacheRows)),TLog#(CacheLineWords)) ) CacheTag;
 typedef Bit#( TLog#(CacheRows) ) CacheIndex;
 typedef Bit#( TLog#(CacheLineWords) ) CacheWordSelect;

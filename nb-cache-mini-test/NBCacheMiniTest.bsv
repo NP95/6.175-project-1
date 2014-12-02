@@ -9,7 +9,7 @@ import CacheTypes::*;
 import NBCacheTypes::*;
 
 import MessageFifo::*;
-import CacheParent::*;
+import ParentProtocolProcessor::*;
 import NBCache::*;
 
 

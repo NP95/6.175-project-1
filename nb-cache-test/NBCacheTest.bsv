@@ -9,14 +9,14 @@ import CacheTypes::*;
 import NBCacheTypes::*;
 
 import MessageFifo::*;
-import CacheParent::*;
+import ParentProtocolProcessor::*;
 import NBCache::*;
 
 
 (* synthesize *)
 module mkNBCacheTest(Empty);
     // Set this to true to see more messages displayed to stdout
-    Bool debug = False;
+    Bool debug = True;
 
     MessageFifo#(8) parentToCache <- mkMessageFifo;
     MessageFifo#(8) cacheToParent <- mkMessageFifo;
