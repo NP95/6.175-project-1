@@ -12,13 +12,21 @@ module mkMessageRouter( Vector#( NumCaches, MessageFifo#( n )) c2r,
     rule c2m;
         Bool done = False;
         for( Integer i = 0; !done && i < valueOf( NumCaches ); i = i + 1 ) begin
-            if( c2r[ i ].notEmpty ) begin
-                case( c2r[ i ].first ) matches
-                    tagged Resp .resp: r2m.enq_resp( resp );
-                    tagged Req  .req:  r2m.enq_req( req );
-                endcase
-                c2r[ i ].deq;
-                done = True;
+            if( c2r[ i ].hasResp ) begin
+                if (c2r[ i ].first matches tagged Resp .resp) begin
+                    r2m.enq_resp( resp );
+                    c2r[ i ].deq;
+                    done = True;
+                end
+            end
+        end
+        for( Integer i = 0; !done && i < valueOf( NumCaches ); i = i + 1 ) begin
+            if( c2r[ i ].hasReq ) begin
+                if ( c2r[ i ].first matches tagged Req  .req) begin
+                    r2m.enq_req( req );
+                    c2r[ i ].deq;
+                    done = True;
+                end
             end
         end
     endrule
