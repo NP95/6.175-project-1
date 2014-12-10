@@ -39,7 +39,7 @@ endmodule
 (* synthesize *)
 module mkPPPTest(Empty);
     // Set this to true to see more messages displayed to stdout
-    Bool debug = False;
+    Bool debug = True;
 
     MessageFifo#(8) toParent <- mkMessageFifo;
     MessageFifo#(8) fromParent <- mkMessageFifo;
